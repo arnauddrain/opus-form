@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 interface Option {
   label: string;
@@ -17,6 +18,9 @@ interface Question {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  @ViewChild('confirmSwal')
+  public readonly confirmSwal!: SwalComponent;
+
   public basePrice = 66;
   public questions: Question[] = [
     {
@@ -38,6 +42,10 @@ export class AppComponent {
       ],
     },
   ];
+
+  public send() {
+    this.confirmSwal.fire();
+  }
 
   public getTotalPrice(index?: number) {
     return (

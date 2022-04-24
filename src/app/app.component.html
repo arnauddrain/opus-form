@@ -47,4 +47,14 @@
 
 <h3>Prix estimé du billet 3 jours : {{ getTotalPrice() | currency: "EUR" }}</h3>
 
-<button class="btn btn-success">Envoyer mes réponses</button>
+<button class="btn btn-success" (click)="send()">
+  <i class="fa-solid fa-paper-plane"></i> Envoyer mes réponses
+</button>
+
+<swal
+  #confirmSwal
+  title="Merci !"
+  text="Tes réponses ont bien été envoyées"
+  icon="success"
+>
+</swal>
