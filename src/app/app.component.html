@@ -5,13 +5,15 @@
   ici]
 </p>
 
-<p>Prix de base du billet 3 jours: {{ basePrice | currency: "EUR" }}</p>
+<h3>Prix de base du billet 3 jours: {{ basePrice | currency: "EUR" }}</h3>
+
+<hr class="col-sm-4" />
 
 <div
   *ngFor="let question of questions; let questionIndex = index"
   class="form-group col-sm-4 mb-4"
 >
-  <label [attr.for]="question.id">{{ question.label }}</label>
+  <label [attr.for]="question.id" class="fw-bold">{{ question.label }}</label>
   <select
     class="form-select"
     [id]="question.id"
@@ -44,6 +46,8 @@
     -> {{ getTotalPrice(questionIndex + 1) | currency: "EUR" }}
   </span>
 </div>
+
+<hr class="col-sm-4" />
 
 <h3>Prix estimé du billet 3 jours : {{ getTotalPrice() | currency: "EUR" }}</h3>
 
