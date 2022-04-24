@@ -1,6 +1,11 @@
 <h1>Questionnaire prix du billet d'Opus</h1>
 
-<p>Prix de base: {{ basePrice | currency: "EUR" }}</p>
+<p>
+  Hello et merci de prendre le temps de donner ton avis ! [insérer texte stylé
+  ici]
+</p>
+
+<p>Prix de base du billet 3 jours: {{ basePrice | currency: "EUR" }}</p>
 
 <div
   *ngFor="let question of questions; let questionIndex = index"
@@ -40,6 +45,6 @@
   </span>
 </div>
 
-<h2>Prix de la place : {{ getTotalPrice() | currency: "EUR" }}</h2>
+<h3>Prix estimé du billet 3 jours : {{ getTotalPrice() | currency: "EUR" }}</h3>
 
 <button class="btn btn-success">Envoyer mes réponses</button>

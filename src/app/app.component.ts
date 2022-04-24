@@ -17,7 +17,7 @@ interface Question {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  public basePrice = 60;
+  public basePrice = 66;
   public questions: Question[] = [
     {
       id: 'price',
