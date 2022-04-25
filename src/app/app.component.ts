@@ -8,6 +8,7 @@ interface Option {
 interface Question {
   id: string;
   label: string;
+  description?: string;
   answerIndex?: number;
   options: Option[];
 }
@@ -26,6 +27,7 @@ export class AppComponent {
     {
       id: 'price',
       label: 'Veux-tu augmenter le prix de la place ?',
+      description: 'Cela nous permettrait de devenir super riches.',
       answerIndex: 1,
       options: [
         { label: 'Oui', value: 2 },
@@ -36,6 +38,8 @@ export class AppComponent {
     {
       id: 'bio',
       label: 'Veux-tu des jus de fruits bio ?',
+      description:
+        "On pense que c'est important et en accord avec les valeurs du festival.",
       options: [
         { label: 'Oui', value: 2 },
         { label: 'Non', value: 0 },

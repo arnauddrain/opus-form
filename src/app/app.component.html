@@ -15,8 +15,9 @@
     class="form-group box"
   >
     <label [attr.for]="question.id" class="fw-bold">{{ question.label }}</label>
+    <p *ngIf="question.description">{{ question.description }}</p>
     <select
-      class="form-select"
+      class="form-select mb-2"
       [id]="question.id"
       [(ngModel)]="question.answerIndex"
     >
