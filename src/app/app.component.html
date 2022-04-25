@@ -1,59 +1,63 @@
-<h1>Questionnaire prix du billet d'Opus</h1>
+<div class="col-sm-7 m-auto">
+  <div class="box master-box">
+    <h1>Questionnaire prix du billet d'Opus</h1>
 
-<p>
-  Hello et merci de prendre le temps de donner ton avis ! [insérer texte stylé
-  ici]
-</p>
+    <p>
+      Hello et merci de prendre le temps de donner ton avis ! [insérer texte
+      stylé ici]
+    </p>
 
-<h3>Prix de base du billet 3 jours: {{ basePrice | currency: "EUR" }}</h3>
+    <h3>Prix de base du billet 3 jours: {{ basePrice | currency: "EUR" }}</h3>
+  </div>
 
-<hr class="col-sm-4" />
-
-<div
-  *ngFor="let question of questions; let questionIndex = index"
-  class="form-group col-sm-4 mb-4"
->
-  <label [attr.for]="question.id" class="fw-bold">{{ question.label }}</label>
-  <select
-    class="form-select"
-    [id]="question.id"
-    [(ngModel)]="question.answerIndex"
+  <div
+    *ngFor="let question of questions; let questionIndex = index"
+    class="form-group box"
   >
-    <option
-      *ngFor="let option of question.options; let optionIndex = index"
-      [value]="optionIndex"
+    <label [attr.for]="question.id" class="fw-bold">{{ question.label }}</label>
+    <select
+      class="form-select"
+      [id]="question.id"
+      [(ngModel)]="question.answerIndex"
     >
-      {{ option.label }}
-    </option>
-  </select>
-  <span *ngIf="question.answerIndex !== undefined">
-    Donc :
-    <span
-      *ngIf="question.options[question.answerIndex].value > 0"
-      class="text-success"
-    >
-      +{{ question.options[question.answerIndex].value | currency: "EUR" }}
+      <option
+        *ngFor="let option of question.options; let optionIndex = index"
+        [value]="optionIndex"
+      >
+        {{ option.label }}
+      </option>
+    </select>
+    <span *ngIf="question.answerIndex !== undefined">
+      Donc :
+      <span
+        *ngIf="question.options[question.answerIndex].value > 0"
+        class="text-success"
+      >
+        +{{ question.options[question.answerIndex].value | currency: "EUR" }}
+      </span>
+      <span
+        *ngIf="question.options[question.answerIndex].value < 0"
+        class="text-danger"
+      >
+        {{ question.options[question.answerIndex].value | currency: "EUR" }}
+      </span>
+      <span *ngIf="question.options[question.answerIndex].value == 0">
+        Pas de changement
+      </span>
+      -> {{ getTotalPrice(questionIndex + 1) | currency: "EUR" }}
     </span>
-    <span
-      *ngIf="question.options[question.answerIndex].value < 0"
-      class="text-danger"
-    >
-      {{ question.options[question.answerIndex].value | currency: "EUR" }}
-    </span>
-    <span *ngIf="question.options[question.answerIndex].value == 0">
-      Pas de changement
-    </span>
-    -> {{ getTotalPrice(questionIndex + 1) | currency: "EUR" }}
-  </span>
+  </div>
+
+  <div class="box master-box">
+    <h3>
+      Prix estimé du billet 3 jours : {{ getTotalPrice() | currency: "EUR" }}
+    </h3>
+
+    <button class="btn btn-success" (click)="send()">
+      <i class="fa-solid fa-paper-plane"></i> Envoyer mes réponses
+    </button>
+  </div>
 </div>
-
-<hr class="col-sm-4" />
-
-<h3>Prix estimé du billet 3 jours : {{ getTotalPrice() | currency: "EUR" }}</h3>
-
-<button class="btn btn-success" (click)="send()">
-  <i class="fa-solid fa-paper-plane"></i> Envoyer mes réponses
-</button>
 
 <swal
   #confirmSwal
