@@ -1,4 +1,9 @@
-<div class="col-sm-7 m-auto">
+<div class="col-sm-7 m-auto" *ngIf="finished">
+  <div class="box master-box">
+    <h1>Merci et à plus à Opus !</h1>
+  </div>
+</div>
+<div class="col-sm-7 m-auto" *ngIf="!finished">
   <div class="box master-box">
     <h1>Questionnaire prix du billet d'Opus</h1>
 
@@ -79,5 +84,13 @@
   title="Merci !"
   text="Tes réponses ont bien été envoyées"
   icon="success"
+>
+</swal>
+
+<swal
+  #errorSwal
+  title="Oops !"
+  text="Une erreur s'est produite, merci de nous recontacter"
+  icon="error"
 >
 </swal>

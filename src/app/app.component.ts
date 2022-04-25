@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 interface Option {
@@ -27,7 +28,10 @@ interface QuestionGroup {
 export class AppComponent {
   @ViewChild('confirmSwal')
   public readonly confirmSwal!: SwalComponent;
+  @ViewChild('errorSwal')
+  public readonly errorSwal!: SwalComponent;
 
+  public finished = false;
   public basePrice = 68;
   public questionGroups: QuestionGroup[] = [
     {
@@ -263,8 +267,35 @@ export class AppComponent {
     },
   ];
 
+  constructor(private firestore: Firestore) {}
+
   public send() {
-    this.confirmSwal.fire();
+    const answers = this.questionGroups
+      .reduce(
+        (allQuestions, questionGroup) => [
+          ...allQuestions,
+          ...questionGroup.questions,
+        ],
+        [] as Question[]
+      )
+      .reduce(
+        (final, q) => ({
+          ...final,
+          [q.id + '-label']: q.options[q.answerIndex]?.label ?? 'N/A',
+          [q.id + '-value']: q.options[q.answerIndex]?.value ?? 'N/A',
+        }),
+        { date: new Date(Date.now()).toDateString() }
+      );
+    const answerCollection = collection(this.firestore, '/answers');
+    addDoc(answerCollection, answers)
+      .then(() => {
+        this.finished = true;
+        this.confirmSwal.fire();
+      })
+      .catch((e) => {
+        console.error(e);
+        this.errorSwal.fire();
+      });
   }
 
   public getTotalPrice() {
