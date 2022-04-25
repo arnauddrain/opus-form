@@ -13,6 +13,7 @@ interface Question {
   description?: string;
   answerIndex?: number;
   options: Option[];
+  personnalChoice?: boolean;
 }
 
 interface QuestionGroup {
@@ -145,7 +146,8 @@ export class AppComponent {
       questions: [
         {
           id: 'navette',
-          label: 'Seriez vous intéressé par cette navette ?',
+          personnalChoice: true,
+          label: 'Seriez vous intéressé par une navette ?',
           description:
             "Nous envisageons de proposer une navette de 40 places depuis Paris. Cela permettrait de passer de 10kgCO2 a moins de 5kgCO2 par personne. Le prix de la navette serait de 30€/personne pour l'aller retour.",
           options: [
@@ -332,13 +334,31 @@ export class AppComponent {
       this.questionGroups.reduce(
         (total, questionGroup) =>
           total +
-          questionGroup.questions.reduce(
+          questionGroup.questions
+            .filter((q) => !q.personnalChoice)
+            .reduce(
+              (totalGroup, question) =>
+                totalGroup +
+                (question.options[question.answerIndex]?.value ?? 0),
+              0
+            ),
+        0
+      )
+    );
+  }
+
+  public getPrivatePrice() {
+    return this.questionGroups.reduce(
+      (total, questionGroup) =>
+        total +
+        questionGroup.questions
+          .filter((q) => q.personnalChoice)
+          .reduce(
             (totalGroup, question) =>
               totalGroup + (question.options[question.answerIndex]?.value ?? 0),
             0
           ),
-        0
-      )
+      0
     );
   }
 }

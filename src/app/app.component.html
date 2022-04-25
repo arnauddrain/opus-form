@@ -70,6 +70,9 @@
           Pas de changement
         </span>
         -> {{ getTotalPrice() | currency: "EUR" }}
+        <span *ngIf="getPrivatePrice() > 0">
+          et {{ getPrivatePrice() | currency: "EUR" }} pour le transport
+        </span>
       </span>
     </div>
   </div>
@@ -77,6 +80,9 @@
   <div class="box master-box">
     <h4>
       Prix estimé du billet 3 jours : {{ getTotalPrice() | currency: "EUR" }}
+      <span *ngIf="getPrivatePrice() > 0">
+        et {{ getPrivatePrice() | currency: "EUR" }} pour le transport
+      </span>
     </h4>
 
     <button class="btn btn-success" (click)="send()">
