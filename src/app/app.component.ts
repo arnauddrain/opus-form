@@ -8,6 +8,7 @@ interface Option {
 }
 interface Question {
   id: string;
+  hideConclusion?: boolean;
   label: string;
   description?: string;
   answerIndex?: number;
@@ -35,6 +36,34 @@ export class AppComponent {
   public basePrice = 68;
   public questionGroups: QuestionGroup[] = [
     {
+      label: 'Bar',
+      questions: [
+        {
+          id: 'alcool-prix',
+          label:
+            'Combien seriez vous prêt à payer pour une pinte de bière/cidre ou un verre de vin ?',
+          description:
+            'Les ventes du bar permettent actuellement de garder un prix de billet abordable grâce aux bénéfices générés, le prix de la bière est donc un paramètre très important pour nous.',
+          options: [
+            { label: '5€00', value: 0 },
+            { label: '5€25', value: -1.125 },
+            { label: '5€50', value: -2.25 },
+          ],
+        },
+        {
+          id: 'soft-prix',
+          label:
+            "Pour 2,5€ quelle quantité de soft voulez vous? (50 cl l'année dernière)",
+          description:
+            "Le prix du soft est pensé pour être attractif par rapport au prix d'une boisson alcoolisée, en parallèle nous essayons d'avoir des softs les plus élaborés possibles (à la framboise par exemple).",
+          options: [
+            { label: '50cl', value: 0 },
+            { label: '33cl', value: -0.625 },
+          ],
+        },
+      ],
+    },
+    {
       label: 'Intendance',
       questions: [
         {
@@ -42,7 +71,7 @@ export class AppComponent {
           label:
             'Quelle part de produits bio souhaitez-vous dans les approvisionnements du festival ?',
           description:
-            "L'an dernier nous avions proposé un festival avec des approvisionnements constitués à plus de 90% de produits locaux et 0% de produits issus de l'agriculture biologique. Le local c'est bien, mais, en terme de bilan carbone, il est assez proche entre la bio non locale et les produits conventionnels locaux (90% des émissions de GES d'un fruit ou légume est lié à sa production et 10% au transport). Sans pour autant aller chercher des produits à l'autre bout de la planète, nous pourrions envisager d'introduire une part de produits biologiques dans notre alimentation. L'idée serait donc de définir un pourcentage minimum de produits bio et français à intégrer dans les approvisionnements. Le reste serait comme l'an dernier local jusqu'à 90%. Dans la mesure du possible, les produits bio seraient locaux.",
+            "L'an dernier nous avions proposé un festival avec des approvisionnements constitués à plus de 90% de produits locaux et 0% de produits issus de l'agriculture biologique. Le local c'est bien, mais, en terme de bilan carbone, il est assez proche entre la bio non locale et les produits conventionnels locaux (90% des émissions de GES d'un fruit ou légume est lié à sa production et 10% au transport). Sans pour autant aller chercher des produits à l'autre bout de la planète, nous pourrions envisager d'introduire une part de produits biologiques dans notre alimentation. L'idée serait donc de définir un pourcentage minimum de produits bio et français à intégrer dans les approvisionnements. Le reste serait comme l'an dernier local jusqu'à 90%. Dans la mesure du possible, les produits bio seraient locaux.<br><a href='https://librairie.ademe.fr/cadic/6529/transitions2050-synthese.pdf?modal=false' target='_blank'>Source</a>",
           options: [
             { label: '0% de bio soit 100% de non bio', value: 0 },
             { label: '25% de bio soit 75% de non bio', value: 2.1 },
@@ -63,7 +92,7 @@ export class AppComponent {
               value: 2,
             },
             {
-              label: 'On fournit seulement à ceux qui veulent',
+              label: 'On fournit seulement à celles et ceux qui veulent',
               value: 0.6,
             },
             { label: 'On ne fournit à personne', value: 0 },
@@ -74,6 +103,7 @@ export class AppComponent {
           label:
             'Nous envisageaons de proposer des crêpes à la vente sur le festival.',
           description: 'Seriez vous intéressé.e ?',
+          hideConclusion: true,
           options: [
             {
               label: 'Oui',
@@ -94,44 +124,16 @@ export class AppComponent {
           options: [
             {
               label: '1€',
-              value: -1.92,
+              value: -1.28,
             },
             {
               label: '1€50',
-              value: -3.12,
+              value: -2.08,
             },
             {
               label: '2€',
-              value: -4.32,
+              value: -2.88,
             },
-          ],
-        },
-      ],
-    },
-    {
-      label: 'Bar',
-      questions: [
-        {
-          id: 'alcool-prix',
-          label:
-            'Combien seriez vous prêt à payer pour une pinte de bière/cidre ou un verre de vin ?',
-          description:
-            'Les ventes du bar permettent actuellement de garder un prix de billet abordable grace aux bénéfices générés, le prix de la bière est donc un paramètre très important pour nous.',
-          options: [
-            { label: '5€00', value: 0 },
-            { label: '5€25', value: -1.125 },
-            { label: '5€50', value: -2.25 },
-          ],
-        },
-        {
-          id: 'soft-prix',
-          label:
-            "Pour 2,5€ quelle quantité de soft voulez vous? (50 cl l'année dernière)",
-          description:
-            "Le prix du soft est pensé pour être attractif par rapport au prix d'une boisson alcoolisée, en parallèle nous essayons d'avoir des softs les plus élaborés possibles (à la framboise par exemple)",
-          options: [
-            { label: '50cl', value: 0 },
-            { label: '33cl', value: -0.625 },
           ],
         },
       ],
@@ -143,45 +145,45 @@ export class AppComponent {
       questions: [
         {
           id: 'navette',
-          label: 'Seriez vous intéressé par une navette?',
+          label: 'Seriez vous intéressé par cette navette ?',
           description:
-            'Nous envisageons de proposer deux navettes de 40 places depuis la gare de Dreux. Cela permettrait de passer de 10kgCO2 a 0,5kgCO2 par personnes. Le prix de la navette serait de 10€/personne',
+            "Nous envisageons de proposer une navette de 40 places depuis Paris. Cela permettrait de passer de 10kgCO2 a moins de 5kgCO2 par personne. Le prix de la navette serait de 30€/personne pour l'aller retour.",
           options: [
             { label: 'Non', value: 0 },
-            { label: "Oui, uniquement à l'aller", value: 7.5 },
-            { label: 'Oui, Uniquement au retour', value: 7.5 },
-            { label: "Oui, pour l'aller/retour", value: 15 },
+            { label: "Oui, uniquement à l'aller", value: 15 },
+            { label: 'Oui, Uniquement au retour', value: 15 },
+            { label: "Oui, pour l'aller/retour", value: 30 },
           ],
         },
-        // {
-        //   id: 'prix-navette',
-        //   label:
-        //     "Quel pourcentage estimez vous qu'il faudrait prendre en charge ?",
-        //   description:
-        //     "Nous envisageons d'inciter les gens à prendre les navettes en prenant en charge une partie du prix de la navette",
-        //   options: [
-        //     {
-        //       label: '0% soit un prix de navette de 10€ par personne',
-        //       value: 0,
-        //     },
-        //     {
-        //       label: '25% soit un prix de navette de 7,5€ par personne',
-        //       value: 1.6,
-        //     },
-        //     {
-        //       label: '50% soit un prix de navette de 5€ par personne',
-        //       value: 3.2,
-        //     },
-        //     {
-        //       label: '75% soit un prix de navette de 2,5€ par personne',
-        //       value: 4.8,
-        //     },
-        //     {
-        //       label: '90% soit un prix de navette de 1€ par personne',
-        //       value: 5.7,
-        //     },
-        //   ],
-        // },
+        {
+          id: 'prix-navette',
+          label:
+            "Pour inciter à prendre la navette, quel pourcentage estimez vous qu'il faudrait prendre en charge ?",
+          description:
+            "Nous envisageons d'inciter les gens à prendre les navettes en prenant en charge une partie du prix de la navette.",
+          options: [
+            {
+              label: '0% soit un prix de navette de 30€ par personne',
+              value: 0,
+            },
+            {
+              label: '25% soit un prix de navette de 22,5€ par personne',
+              value: 1.5,
+            },
+            {
+              label: '50% soit un prix de navette de 15€ par personne',
+              value: 3,
+            },
+            {
+              label: '75% soit un prix de navette de 7,5€ par personne',
+              value: 4.5,
+            },
+            {
+              label: '90% soit un prix de navette de 3€ par personne',
+              value: 5.4,
+            },
+          ],
+        },
         {
           id: 'cyclistes',
           label:
@@ -212,18 +214,18 @@ export class AppComponent {
           id: 'artistes-renommes',
           label: 'Combien d\'artistes "plus renommés" souhaitez-vous voir ?',
           description:
-            "Pour des raisons de coût du billet, nous avons décidé de booker des artistes à renommée limitée mais de grande qualité. Certains et certaines d'entre eux nous ont gentillement fait des tarifs pour soutenir les débuts du festival. Merci à eux ! Nous pourrions changer ce fonctionnement et avoir des artistes plus connus si le prix du billet augmente.",
+            "Pour des raisons de coût du billet, nous avons décidé de booker des artistes à renommée limitée mais de grande qualité. Certains et certaines d'entre eux nous ont gentillement fait des tarifs pour soutenir les débuts du festival. Merci à eux ! Nous pourrions changer ce fonctionnement et avoir des artistes plus renommés si le prix du billet augmente.",
           options: [
             { label: '0', value: 0 },
-            { label: '1', value: 0 },
-            { label: '2', value: 0 },
-            { label: '3', value: 0 },
-            { label: '4', value: 0 },
+            { label: '1', value: 3 },
+            { label: '2', value: 6 },
+            { label: '3', value: 9 },
+            { label: '4', value: 12 },
           ],
         },
         {
           id: 'salaire-inge',
-          label: 'Seriez vous prêt.e à payer ces personnes?',
+          label: 'Seriez vous prêt.e à payer les techniciens bénévoles ?',
           description:
             "L'an dernier, nous avions la chance d'avoir des amis et connaissance qui ont accepté de venir bénévolement pour nous aider et faire leur travail gratuitement. Cela pour des raisons de coûts. Nous ne sommes pas forcément convaincus de ce parti pris et pensons que, chaque personne professionnelle sur le festival doit pouvoir obtenir un salaire.",
           options: [
@@ -243,11 +245,19 @@ export class AppComponent {
           label:
             'Quelle somme souhaitez-vous que nous investissions dans le matériel du festival ? (prix par personne)',
           description:
-            "Investir dans du matériel nous permettrait de de gagner en qualité, en confort et en efficacité. Seulement, investir nous demanderait de la place de stockage. Cette place (un box dans un garage) coûterait environ 50€ par mois + le prix de l'investissement. Nous pourrions acheter du matériel d'éclairage, de cuisine, de la décoration etc. Cet investissement serait amorti sur plusieurs années. 2,5€ seraient par défaut utilisés par le box.",
+            "Investir dans du matériel nous permettrait de de gagner en qualité, en confort et en efficacité. Seulement, investir nous demanderait de la place de stockage. Cette place (un box dans un garage) coûterait environ 50€ par mois + le prix de l'investissement. Nous pourrions acheter du matériel d'éclairage, de cuisine, de la décoration etc. Cet investissement serait amorti sur plusieurs années.",
           options: [
             { label: '0', value: 0 },
-            { label: '0.5€ soit 3€', value: 3 },
-            { label: '2.5€ soit 5€', value: 5 },
+            {
+              label:
+                '0.5€ soit 3€ (2,5€ seraient par défaut utilisés par le box)',
+              value: 3,
+            },
+            {
+              label:
+                '2.5€ soit 5€ (2,5€ seraient par défaut utilisés par le box)',
+              value: 5,
+            },
           ],
         },
         {
@@ -296,6 +306,24 @@ export class AppComponent {
         console.error(e);
         this.errorSwal.fire();
       });
+  }
+
+  public onChange(question: Question) {
+    if (question.id === 'prix-navette') {
+      const percentage =
+        +question.options[question.answerIndex]?.label.split('%')[0] ?? 0;
+      const navetteQuestion = this.questionGroups
+        .find((qg) => qg.label === 'Transports')
+        .questions.find((q) => q.id === 'navette');
+      navetteQuestion.options.forEach((o, index) => {
+        if (index === 1 || index === 2) {
+          o.value = 15 - 15 * (percentage / 100);
+        }
+        if (index === 3) {
+          o.value = 30 - 30 * (percentage / 100);
+        }
+      });
+    }
   }
 
   public getTotalPrice() {

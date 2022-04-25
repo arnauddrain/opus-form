@@ -8,7 +8,7 @@
     <h1>Questionnaire prix du billet d'Opus</h1>
 
     <p>
-      Bonjour à toutes et tous, Nous cherchons à estimer au mieux le prix du
+      Bonjour à toutes et tous, nous cherchons à estimer au mieux le prix du
       festival pour que tout le monde s'y retrouve, nous avons donc besoin de
       votre avis sur quelques points particuliers : Le prix total évoluera en
       fonction de vos réponses
@@ -32,11 +32,15 @@
       <label [attr.for]="question.id" class="fw-bold">{{
         question.label
       }}</label>
-      <p *ngIf="question.description">{{ question.description }}</p>
+      <p *ngIf="question.description" innerHTML="{{ question.description }}">
+        <!-- small hack to display html tags, sorry -->
+        {{ question.description }}
+      </p>
       <select
         class="form-select mb-2"
         [id]="question.id"
         [(ngModel)]="question.answerIndex"
+        (change)="onChange(question)"
       >
         <option [value]="undefined">Sélectionner</option>
         <option
@@ -46,7 +50,9 @@
           {{ option.label }}
         </option>
       </select>
-      <span *ngIf="question.answerIndex !== undefined">
+      <span
+        *ngIf="question.answerIndex !== undefined && !question.hideConclusion"
+      >
         Donc :
         <span
           *ngIf="question.options[question.answerIndex].value > 0"
