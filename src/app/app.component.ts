@@ -294,7 +294,7 @@ export class AppComponent {
           [q.id + '-label']: q.options[q.answerIndex]?.label ?? 'N/A',
           [q.id + '-value']: q.options[q.answerIndex]?.value ?? 'N/A',
         }),
-        { date: new Date(Date.now()).toDateString() }
+        { date: new Date(Date.now()) }
       );
     const answerCollection = collection(this.firestore, '/answers');
     addDoc(answerCollection, answers)
