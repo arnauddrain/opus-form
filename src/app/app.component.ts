@@ -72,7 +72,7 @@ export class AppComponent {
           label:
             'Quelle part de produits bio souhaitez-vous dans les approvisionnements du festival ?',
           description:
-            "L'an dernier nous avions proposé un festival avec des approvisionnements constitués à plus de 90% de produits locaux et 0% de produits issus de l'agriculture biologique. Le local c'est bien, mais, en terme de bilan carbone, il est assez proche entre la bio non locale et les produits conventionnels locaux (90% des émissions de GES d'un fruit ou légume est lié à sa production et 10% au transport). Sans pour autant aller chercher des produits à l'autre bout de la planète, nous pourrions envisager d'introduire une part de produits biologiques dans notre alimentation. L'idée serait donc de définir un pourcentage minimum de produits bio et français à intégrer dans les approvisionnements. Le reste serait comme l'an dernier local jusqu'à 90%. Dans la mesure du possible, les produits bio seraient locaux.<br><a href='https://librairie.ademe.fr/cadic/6529/transitions2050-synthese.pdf?modal=false' target='_blank'>Source</a>",
+            "L'an dernier nous avions proposé un festival avec des approvisionnements constitués à plus de 75% de produits locaux et 10% de produits issus de l'agriculture biologique. Le local c'est bien, mais, en terme de bilan carbone, il est assez proche entre la bio non locale et les produits conventionnels locaux (90% des émissions de GES d'un fruit ou légume est lié à sa production et 10% au transport). Sans pour autant aller chercher des produits à l'autre bout de la planète, nous pourrions envisager d'introduire une part de produits biologiques dans notre alimentation. L'idée serait donc de définir un pourcentage minimum de produits bio et français à intégrer dans les approvisionnements. Le reste serait comme l'an dernier local jusqu'à 90%. Dans la mesure du possible, les produits bio seraient locaux.<br><a href='https://librairie.ademe.fr/cadic/6529/transitions2050-synthese.pdf?modal=false' target='_blank'>Source</a>",
           options: [
             { label: '0% de bio soit 100% de non bio', value: 0 },
             { label: '25% de bio soit 75% de non bio', value: 2.1 },
@@ -267,7 +267,7 @@ export class AppComponent {
           label:
             'Quelle quantité de places à -50% souhaitez vous mettre à disposition de celles et ceux qui en ont besoin ?',
           description:
-            "Le prix du billet augmente cette année à cause de l'inflation. Nous souhaitons permettre au plus grand nombre de personnes de venir à ce festival. Nous proponsons donc la mise en place d'une caisse de solidarité.",
+            "Le prix du billet augmente cette année à cause de l'inflation. Nous souhaitons permettre au plus grand nombre de personnes de venir à ce festival. Nous proposons donc la mise en place d'une caisse de solidarité.",
           options: [
             { label: '0', value: 0 },
             { label: '10', value: 1.52 },
