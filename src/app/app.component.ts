@@ -243,6 +243,31 @@ export class AppComponent {
       label: 'Autres dépenses',
       questions: [
         {
+          id: 'toilettes',
+          label: 'Comment voulez vous que les toilettes évoluent ? ',
+          description:
+            "Nous avons eu quelques retours sur les toilettes et nous envisageons de les améliorer, aussi bien l'assise que la cabine (actuellement en bâche)",
+          options: [
+            { label: 'On ne change rien', value: 0 },
+            {
+              label: 'On construit une assise en bois + cuvette nous même',
+              value: 0.5,
+            },
+            {
+              label: 'On construit une cabine en bois',
+              value: 1.5,
+            },
+            {
+              label: 'On construit une assise en bois + cuvette + cabine',
+              value: 2,
+            },
+            {
+              label: 'On loue des toilettes sèches',
+              value: 4,
+            },
+          ],
+        },
+        {
           id: 'prix-materiel',
           label:
             'Quelle somme souhaitez-vous que nous investissions dans le matériel du festival ? (prix par personne)',
